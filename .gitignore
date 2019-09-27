@@ -1,0 +1,21 @@
+*/target/
+*.classpath
+*.project
+*/.settings/
+*/.vscode/
+*.idea/
+*.iml
+
+
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+######################
+# Maven
+######################
+/*/log/
+/*target/
+
