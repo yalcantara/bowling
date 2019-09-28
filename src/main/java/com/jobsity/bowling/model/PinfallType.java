@@ -1,8 +1,8 @@
-package com.jobsity.model;
+package com.jobsity.bowling.model;
 
-import com.jobsity.utils.InvalidScoreException;
+import com.jobsity.bowling.utils.InvalidScoreException;
 
-import static com.jobsity.utils.Constants.*;
+import static com.jobsity.bowling.utils.Constants.*;
 
 public enum PinfallType {
 	NUMBER,

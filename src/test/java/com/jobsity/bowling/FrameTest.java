@@ -1,6 +1,6 @@
-package com.jobsity;
+package com.jobsity.bowling;
 
-import com.jobsity.model.Frame;
+import com.jobsity.bowling.model.Frame;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

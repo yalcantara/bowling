@@ -1,12 +1,12 @@
-package com.jobsity.model;
+package com.jobsity.bowling.model;
 
-import com.jobsity.utils.InvalidScoreException;
-import com.jobsity.utils.InvalidStateException;
+import com.jobsity.bowling.utils.InvalidScoreException;
+import com.jobsity.bowling.utils.InvalidStateException;
 
 import java.io.Serializable;
 
-import static com.jobsity.utils.AppUtils.*;
-import static com.jobsity.utils.Constants.*;
+import static com.jobsity.bowling.utils.AppUtils.*;
+import static com.jobsity.bowling.utils.Constants.*;
 
 public class Frame implements Serializable {
 	
@@ -98,6 +98,7 @@ public class Frame implements Serializable {
 			default:
 				unsupported(type);
 		}
+		last = null;
 	}
 	
 	public Integer getLast() {
@@ -168,6 +169,24 @@ public class Frame implements Serializable {
 		}
 		
 		return ans;
+	}
+	
+	public void append(String val){
+		if(first == null){
+			setFirst(val);
+			return;
+		}
+		
+		if(second == null){
+			setSecond(val);
+			return;
+		}
+		
+		if(last == null){
+			setLast(val);
+			return;
+		}
+		throw new InvalidStateException("Can not append another score to this frame.");
 	}
 	
 	@Override

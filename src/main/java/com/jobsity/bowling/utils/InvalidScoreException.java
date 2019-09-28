@@ -1,4 +1,4 @@
-package com.jobsity.utils;
+package com.jobsity.bowling.utils;
 
 public class InvalidScoreException extends RuntimeException {
 

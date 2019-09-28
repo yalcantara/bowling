@@ -1,4 +1,4 @@
-package com.jobsity;
+package com.jobsity.bowling;
 
 import static org.junit.Assert.assertTrue;
 
