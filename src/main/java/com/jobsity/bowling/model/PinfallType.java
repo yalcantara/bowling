@@ -6,6 +6,7 @@ import static com.jobsity.bowling.utils.Constants.*;
 
 public enum PinfallType {
 	NUMBER,
+	FOUL,
 	STRIKE,
 	SPARE;
 
@@ -14,6 +15,10 @@ public enum PinfallType {
 
 		if("X".equalsIgnoreCase(str)){
 			return STRIKE;
+		}
+		
+		if("F".equalsIgnoreCase(str)){
+			return FOUL;
 		}
 
 		if("/".equals(str)){
