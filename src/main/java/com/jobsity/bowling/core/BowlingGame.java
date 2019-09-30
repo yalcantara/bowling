@@ -1,6 +1,7 @@
 package com.jobsity.bowling.core;
 
 import com.jobsity.bowling.model.Sheet;
+import com.jobsity.bowling.utils.Constants;
 
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
@@ -22,6 +23,7 @@ public class BowlingGame {
 		Sheet sheet = sheets.get(player);
 		if(sheet == null){
 			sheet = new Sheet();
+			sheet.setPlayer(player);
 			sheets.put(player, sheet);
 		}
 		
@@ -49,5 +51,16 @@ public class BowlingGame {
 			sheet.print(pw);
 			pw.println();
 		}
+	}
+	
+	
+	public int getScore(String player, int frame){
+		checkParamNotNull("player", player);
+		checkParamBetween("frame", 1, Constants.TOTAL_FRAMES, frame);
+		Sheet sheet = sheets.get(player);
+		if(sheet == null){
+			throw new BowlingException("The player '" + player +"' does not exist.");
+		}
+		return sheet.computeScore(frame);
 	}
 }

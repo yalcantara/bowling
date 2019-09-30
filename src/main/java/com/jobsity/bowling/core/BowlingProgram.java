@@ -2,6 +2,7 @@ package com.jobsity.bowling.core;
 
 
 import com.jobsity.bowling.model.PlayerEntry;
+import com.jobsity.bowling.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,4 +54,9 @@ public class BowlingProgram {
 		game.print();
 	}
 	
+	
+	public int score(String player, int frame){
+		//composite shortcut
+		return game.getScore(player, frame);
+	}
 }

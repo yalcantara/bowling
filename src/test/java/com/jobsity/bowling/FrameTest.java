@@ -9,7 +9,7 @@ public class FrameTest {
 
 	
 	@Test
-	public void testReady(){
+	public void testIsReady(){
 		Frame f1 = new Frame(1);
 
 		f1.setFirst("2");

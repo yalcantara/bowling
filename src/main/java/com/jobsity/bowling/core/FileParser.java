@@ -34,6 +34,10 @@ public class FileParser implements BowlingParser {
 			throw new ParseException("The line parameter can not be empty.");
 		}
 		
+		if(s.contains("\t") == false){
+			throw new ParseException("The line " + num +" does not contain the tab character.");
+		}
+		
 		String[] arr = s.split("\t");
 		
 		if(arr.length != 2){
