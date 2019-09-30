@@ -1,8 +1,10 @@
 package com.jobsity.bowling.model;
 
-import com.jobsity.bowling.utils.InvalidStateException;
+import com.jobsity.bowling.core.BowlingException;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Arrays;
 
 import static com.jobsity.bowling.utils.Constants.*;
 import static com.jobsity.bowling.utils.AppUtils.*;
@@ -36,6 +38,9 @@ public class Sheet implements Serializable {
 	}
 	
 	public void append(String val){
+		if(crt == frames.length){
+			throw new BowlingException("Maximun number of frames/shots reached.");
+		}
 		Frame f = frames[crt];
 		f.append(val);
 		if(f.isReady()){
@@ -168,5 +173,42 @@ public class Sheet implements Serializable {
 		return sum;
 	}
 	
+	public void print(){
+		PrintWriter pw = new PrintWriter(System.out);
+		print(pw);
+		pw.flush();
+	}
 	
+	public void print(PrintWriter pw){
+		String name = (player ==null)?"":player;
+		pw.println(name);
+		pw.print("Pinfalls\t");
+		for(int i =0; i < frames.length; i++){
+			Frame frame = frames[i];
+			frame.print(pw);
+			if(i + 1 < frames.length) {
+				pw.print("\t");
+			}
+		}
+		pw.println();
+		pw.print("Score\t\t");
+		for(int i =0; i < frames.length; i++){
+			int num = i + 1;
+			int score = computeScore(num);
+			pw.print(score);
+			if(i + 1 < frames.length) {
+				pw.print("\t\t");
+			}
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Sheet{" +
+				"player='" + player + '\'' +
+				", frames=" + Arrays.toString(frames) +
+				", score=" + Arrays.toString(score) +
+				", crt=" + crt +
+				'}';
+	}
 }

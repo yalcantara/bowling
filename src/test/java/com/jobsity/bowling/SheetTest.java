@@ -116,4 +116,79 @@ public class SheetTest {
 		assertEquals(true, s.isReady(10));
 		assertEquals(60, s.computeFrameScore(10));
 	}
+	
+	@Test
+	public void testAllZero(){
+		Sheet s = new Sheet();
+		s.append("0"); //1st frame
+		s.append("0");
+		s.append("0");
+		s.append("0");
+		s.append("0"); //3rd frame
+		s.append("0");
+		s.append("0");
+		s.append("0");
+		s.append("0"); //5th frame
+		s.append("0");
+		s.append("0");
+		s.append("0");
+		s.append("0"); //7th frame
+		s.append("0");
+		s.append("0");
+		s.append("0");
+		s.append("0"); //9th frame
+		s.append("0");
+		s.append("0"); //10th frame
+		s.append("0");
+		
+		assertEquals(0, s.computeScore(10));
+	}
+	
+	@Test
+	public void testAllFoul(){
+		Sheet s = new Sheet();
+		s.append("f"); //1st frame
+		s.append("f");
+		s.append("f");
+		s.append("f");
+		s.append("f"); //3rd frame
+		s.append("f");
+		s.append("f");
+		s.append("f");
+		s.append("f"); //5th frame
+		s.append("f");
+		s.append("f");
+		s.append("f");
+		s.append("f"); //7th frame
+		s.append("f");
+		s.append("f");
+		s.append("f");
+		s.append("f"); //9th frame
+		s.append("f");
+		s.append("f"); //10th frame
+		s.append("f");
+		
+		assertEquals(0, s.computeScore(10));
+	}
+	
+	@Test
+	public void testAllStrike(){
+		Sheet s = new Sheet();
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x");
+		s.append("x"); //10th frame
+		s.append("x");
+		s.append("x");
+		
+		assertEquals(300, s.computeScore(10));
+	}
+	
+	
 }

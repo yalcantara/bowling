@@ -37,6 +37,10 @@ public class AppUtils {
 		}
 	}
 	
+	public static boolean isNullOrEmpty(String str){
+		return strip(str) == null;
+	}
+	
 	public static String strip(String str) {
 		if (str == null) {
 			return null;
@@ -50,4 +54,6 @@ public class AppUtils {
 		
 		return s;
 	}
+	
+	
 }

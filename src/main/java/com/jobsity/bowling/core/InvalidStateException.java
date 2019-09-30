@@ -1,6 +1,6 @@
-package com.jobsity.bowling.utils;
+package com.jobsity.bowling.core;
 
-public class InvalidStateException extends RuntimeException {
+public class InvalidStateException extends BowlingException {
 	
 	public InvalidStateException() {
 	}

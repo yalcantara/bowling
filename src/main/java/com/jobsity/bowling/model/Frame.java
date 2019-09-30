@@ -1,8 +1,9 @@
 package com.jobsity.bowling.model;
 
-import com.jobsity.bowling.utils.InvalidScoreException;
-import com.jobsity.bowling.utils.InvalidStateException;
+import com.jobsity.bowling.core.InvalidScoreException;
+import com.jobsity.bowling.core.InvalidStateException;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 
 import static com.jobsity.bowling.utils.AppUtils.*;
@@ -13,8 +14,13 @@ public class Frame implements Serializable {
 	
 	private final int num;
 	private Integer first;
+	private boolean firstFoul = false;
+	
 	private Integer second;
+	private boolean secondFoul = false;
+	
 	private Integer last; //used only in the 10th frame.
+	private boolean lastFoul = false;
 	
 	public Frame(int num) {
 		checkParamBetween("num", 1, 10, num);
@@ -81,6 +87,7 @@ public class Frame implements Serializable {
 						".");
 			case FOUL:
 				first = 0;
+				firstFoul = true;
 				break;
 			case NUMBER:
 				int num = Integer.parseInt(val);
@@ -151,6 +158,7 @@ public class Frame implements Serializable {
 				break;
 			case FOUL:
 				second = 0;
+				secondFoul = true;
 				break;
 			case NUMBER:
 				int pinfalls = Integer.parseInt(val);
@@ -192,6 +200,7 @@ public class Frame implements Serializable {
 						"10th frame.");
 			case FOUL:
 				last = 0;
+				lastFoul = true;
 				break;
 			case NUMBER:
 				int num = Integer.parseInt(val);
@@ -276,6 +285,79 @@ public class Frame implements Serializable {
 	//Convenient method checking if it is the last frame (10th).
 	public boolean isLast() {
 		return num == TOTAL_FRAMES;
+	}
+	
+	public boolean isSpare(){
+		int f = checkAndGetFirst();
+		if(f == STRIKE_VALUE){
+			return false;
+		}
+		
+		int s = checkAndGetSecond();
+		if(f + s == TOTAL_PIN){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public String getDisplay(int shot){
+		checkParamBetween("shot", 1, 3, shot);
+		
+		if(shot == 1 && firstFoul) return "F";
+		if(shot == 2 && secondFoul) return "F";
+		if(shot == 3 && lastFoul) return "F";
+		
+		Integer val = (shot == 1)?first:(shot==2)?second:last;
+	
+		if(val == null){
+			return "";
+		}
+		
+		if(val == STRIKE_VALUE){
+			return "X";
+		}
+		
+		if(shot == 2 && isSpare()){
+			return "/";
+		}
+		
+		return String.valueOf(val);
+	}
+	
+	public void print(PrintWriter pw){
+
+		if(isLast()){
+			
+			String f = getDisplay(1);
+			pw.write(f);
+			pw.write('\t');
+			String s = getDisplay(2);
+			pw.write(s);
+			
+			PinfallType secondType = getSecondType();
+			if(getFirstType() == PinfallType.STRIKE || secondType == PinfallType.SPARE){
+				String l = getDisplay(3);
+				pw.write('\t');
+				pw.write(l);
+				return;
+			}
+			return;
+		}
+		
+		String f = getDisplay(1);
+		if(getFirstType() == PinfallType.STRIKE){
+			pw.write('\t'); // in case of a strike, it should be aligned to the right
+			pw.write(f);
+			return;
+		}
+		
+		String s = getDisplay(2);
+		
+		pw.write(f);
+		pw.write('\t');
+		pw.write(s);
 	}
 	
 	@Override

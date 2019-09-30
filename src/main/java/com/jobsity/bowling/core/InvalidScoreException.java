@@ -1,6 +1,6 @@
-package com.jobsity.bowling.utils;
+package com.jobsity.bowling.core;
 
-public class InvalidScoreException extends RuntimeException {
+public class InvalidScoreException extends BowlingException {
 
 	public InvalidScoreException() {
 	}

@@ -1,8 +1,9 @@
 package com.jobsity.bowling.model;
 
-import com.jobsity.bowling.utils.InvalidScoreException;
+import com.jobsity.bowling.core.InvalidScoreException;
 
 import static com.jobsity.bowling.utils.Constants.*;
+import static com.jobsity.bowling.utils.AppUtils.*;
 
 public enum PinfallType {
 	NUMBER,
@@ -12,6 +13,7 @@ public enum PinfallType {
 
 
 	public static PinfallType parse(String str){
+		checkParamNotNull("str", str);
 
 		if("X".equalsIgnoreCase(str)){
 			return STRIKE;
