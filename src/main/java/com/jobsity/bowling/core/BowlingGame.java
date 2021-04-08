@@ -37,6 +37,7 @@ public class BowlingGame {
 	}
 	
 	public void print(PrintWriter pw){
+		pw.println();
 		pw.print("Frame\t\t");
 		
 		for(int i =1; i <= TOTAL_FRAMES; i++){
@@ -47,8 +48,10 @@ public class BowlingGame {
 			}
 		}
 		pw.println();
+		pw.println();
 		for(Sheet sheet:sheets.values()){
 			sheet.print(pw);
+			pw.println();
 			pw.println();
 		}
 	}
